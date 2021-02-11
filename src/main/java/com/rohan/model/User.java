@@ -3,6 +3,8 @@ package com.rohan.model;
 import java.util.Date;
 import java.util.List;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
+
 public class User {
 
 	private Integer id;
@@ -38,8 +40,14 @@ public class User {
 		return birthDate;
 	}
 
+	@JsonFormat(pattern="yyyy-MM-dd'T'HH:mm:ss")
 	public void setBirthDate(Date birthDate) {
 		this.birthDate = birthDate;
+	}
+	
+	public boolean equals(Object o) {
+		User user = (User)o;
+		return (this.name == user.name && this.birthDate == user.birthDate); 
 	}
 }
 

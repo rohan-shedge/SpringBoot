@@ -1,7 +1,9 @@
 package com.rohan.config.dao;
 
 
+import java.time.LocalDate;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.Date;
 import java.util.Iterator;
 import java.util.List;
@@ -43,16 +45,23 @@ public class UserDao {
 		     .findFirst();
 	}
 	
-	public Optional<User> deleteById(int id) {
+	public void deleteById(int id) {
 
 		//only removal , return boolean
-		//users.removeIf(x -> x.getId() ==id);
-		users.stream()
-		     .filter(x -> x.getId() ==id)
-		     .map(p -> {
-		    	 users.remove(p);
-		    	 return p;
-		     });
-		return null;
+		users.removeIf(x -> x.getId() ==id);
+		/*
+		 * users.stream() .filter(x -> x.getId() ==id) .forEach(p -> { users.remove(p);
+		 * return; }); return;
+		 */
+	}
+
+	public User createOne(User user) {
+		if (user.getId() == null) {
+		++usersCount;
+		user.setId(usersCount);
+		}
+		users.add(user);
+		return user;
+	 
 	}
 }
