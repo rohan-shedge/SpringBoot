@@ -4,11 +4,13 @@ import java.net.URI;
 import java.util.List;
 import java.util.Optional;
 
+import javax.validation.Valid;
 import javax.websocket.server.PathParam;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -20,7 +22,6 @@ import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 import com.rohan.config.dao.UserDao;
 import com.rohan.config.exception.UserNotFoundException;
 import com.rohan.model.User;
-
 @RestController
 public class UserResource {
 
@@ -45,7 +46,7 @@ public class UserResource {
 	
 	//create specific User
 	@PostMapping(path = "/users")
-	public ResponseEntity<Object> createOne(@RequestBody User user) { 
+	public ResponseEntity<Object> createOne(@Valid @RequestBody User user) { 
 		User savedUser = userDao.createOne(user);
 		URI location = ServletUriComponentsBuilder
 		    .fromCurrentRequest()

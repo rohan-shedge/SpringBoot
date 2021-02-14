@@ -1,4 +1,4 @@
-package com.rohan.SpringBoot_snippets;
+package com.rohan.config;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
